@@ -1,64 +1,65 @@
 /*sort 0 1 in an array given that array has only 0's and 1's*/
 #include<stdio.h>
 #include<conio.h>
-void sort1(int a[100], int n, int x)
+void sort1(int a[100], int len, int len0)
 {
-	int i;
-	for (i = 0; i < x; i++)
-		a[i] = 0;
-	for (i = x; i < n; i++)
-		a[i] = 1;
+	int itr;
+	for (itr = 0; itr < len0; itr++)
+		a[itr] = 0;
+	for (itr = len0; itr < len; itr++)
+		a[itr] = 1;
 }
-void sort2(int a[100], int n)
+void sort2(int a[100], int len)
 {
-	int i = 0, j = n;
-	while (i<j)
+	int itr1 = 0, itr2= len;
+	while (itr1<itr2)
 	{
 
-		if ((a[i] == 1) && (a[j] == 0))
+		if ((a[itr1] == 1) && (a[itr2] == 0))
 		{
-			a[i] = 0;
-			a[j] = 1;
-			i++; j--;
+			a[itr1] = 0;
+			a[itr2] = 1;
+			itr1++;
+			itr2--;
 		}
-		else if (a[i] != 1)
-			i++;
-		else if (a[j] != 0)
-			j--;
+		else if (a[itr1] != 1)
+			itr1++;
+		else if (a[itr2] != 0)
+			itr2--;
 	}
 }
-void sort3(int a[100], int n, int sum)
+void sort3(int a[100], int len, int sum)
 {
-	int i;
-	for (i = 0; i <n - sum; i++)
-		a[i] = 0;
-	for (; i < n; i++)
+	int itr;
+	for (itr = 0; itr <len - sum; itr++)
+		a[itr] = 0;
+	for (; itr < len; itr++)
 	{
-		a[i] = 1;
+		a[itr] = 1;
 	}
 }
 void main()
 {
-	int n, a[100], i, count = 0, sum = 0;
-	scanf("%d", &n);
-	for (i = 0; i < n; i++)
+	int len,a[100], itr, count = 0, sum = 0;		//len is total length of the array
+	scanf("%d", &len);
+	for (itr = 0; itr < len; itr++)
 	{
-		scanf("%d", &a[i]);
-		sum = sum + a[i];
-		if (a[i] == 0)
+		scanf("%d", &a[itr]);
+		sum = sum + a[itr];
+		if (a[itr] == 0)
 			count = count + 1;
 	}
-	sort1(a, n, count);
-	for (i = 0; i <n; i++)
-		printf("%d", a[i]);
+	sort1(a,len, count);							//sorting method 1 count is no.of 0's in array
+	for (itr = 0; itr <len; itr++)
+		printf("%d", a[itr]);
 	printf("\n");
-	sort2(a, n);
-	for (i = 0; i <n; i++)
-		printf("%d", a[i]);
+	sort2(a, len);									//sorting method 2
+	for (itr = 0; itr <len; itr++)
+		printf("%d", a[itr]);
 	printf("\n");
-	sort3(a, n, sum);
-	for (i = 0; i <n; i++)
-		printf("%d", a[i]);
+	sort3(a, len, sum);								//sorting method 3
+	for (itr = 0; itr <len; itr++)
+		printf("%d", a[itr]);
 
 	getch();
 
