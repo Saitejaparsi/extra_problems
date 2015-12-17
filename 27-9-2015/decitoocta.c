@@ -1,51 +1,53 @@
-/* conversion of a decimal number to octal number*/
+/* conversion of a decimal number to binary and then to octal number*/
 #include<stdio.h>
 #include<conio.h>
-#include<malloc.h>
 void conv(int n)
 {
-	int x, i = 0, temp = 0, j, b;
+	int rem, itr = 0, temp = 0, var1, var2;
 	int a[100];
 	while (n > 0)		//conversion to binary
 	{
-		j = n % 2;
-		a[i] = j;
+		var1 = n % 2;
+		a[itr] = var1;
 		n = n / 2;
-		i++;
+		itr++;
 	}
-	j = i;
-	b = j;
-	j = 0;
+	var1 = itr;
+	var2 = var1;
+	var1 = 0;
 	temp = 0;
-	for (i = 0; i < b; i++)			//coversion to octal
+	for (itr = 0; itr < var2; itr++)			//coversion to octal
 	{
-		if (i % 3 == 0)
-			x = 1;
-		if (i % 3 == 1)
-			x = 2;
-		if (i % 3 == 2)
-			x = 4;
-		temp = a[i] * x + temp;
+		if (itr % 3 == 0)						//as in octal set of 3 bits are considered
+			rem = 1;
+		if (itr % 3 == 1)
+			rem = 2;
+		if (itr % 3 == 2)
+			rem = 4;
+		temp = a[itr] * rem + temp;
 		//printf("%d ", temp);
-		a[j] = temp;
+		a[var1] = temp;
 
-		if (i % 3 == 2)
+		if (itr % 3 == 2)						//afetr 3 bits are considered as a single one in octal,so after 3 bits incrementing the var1(itrator) value
 		{
-			j++;
+			var1++;
 			temp = 0;
 		}
 	}
-	if (i % 3 == 0)
-		j = j - 1;
+	if (itr % 3 == 0)
+		var1 = var1 - 1;
 	printf("\noctal\n");
-	for (i = j; i >= 0; i--)
-		printf("%d", a[i]);
+	for (itr = var1; itr >= 0; itr--)			//printing the octal values
+		printf("%d", a[itr]);
 }
 void main()
 {
 	int n;
 	printf("enter number\n");
 	scanf("%d", &n);
-	conv(n);
+	if (n >= 0)
+		conv(n);
+	else
+		printf("invalid number");
 	getch();
 }

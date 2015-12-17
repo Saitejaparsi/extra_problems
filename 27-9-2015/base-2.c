@@ -8,84 +8,89 @@ so the final format is 1 1 0 1 0 which is (16 -8 -2 == 6)*/
 #include<stdio.h>
 #include<conio.h>
 #include<malloc.h>
-void check(int a[50], int count, int i, int n)
+void check(int a[50], int count, int itr, int tlen)
 {
-	int j = 0;
+	int var1 = 0;
 
-	while (i < n)
+	while (itr < tlen)
 	{
-		j = 1;
+		var1 = 1;
 		if (count == 0)
 		{
-			if (a[i] == 0)
+			if (a[itr] == 0)
 			{
-				a[i] = 0;
-				i++;
+				a[itr] = 0;
+				itr++;
 			}
 			else
 			{
-				a[i] = 1;
-				if (i % 2 == 1)
+				a[itr] = 1;
+				if (itr % 2 == 1)
 					count = 1;
 				else
 					count = 0;
-				i++;
+				itr++;
 			}
-			j = 0;
+			var1 = 0;
 		}
-		if (count == 1 && j != 0)
+		if (count == 1 && var1 != 0)
 		{
-			if (a[i] == 1)
+			if (a[itr] == 1)
 			{
-				a[i] = 0;
+				a[itr] = 0;
 				count = 1;
-				i++;
+				itr++;
 			}
-			else if (a[i] == 0 || a[i] == '\0')
+			else if (a[itr] == 0 || a[itr] == '\0')
 			{
-				a[i] = 1;
+				a[itr] = 1;
 				count = 0;
-				if (i % 2 == 1)
+				if (itr % 2 == 1)
 					count = 1;
-				i++;
+				itr++;
 			}
-			j = 1;
+			var1 = 1;
 		}
 	}
 	printf("base:-2\n");
-	for (j = i - 1; j >= 0; j--)
-		printf("%d", a[j]);
+	for (var1 = itr - 1; var1 >= 0; var1--)
+		printf("%d", a[var1]);
 
 }
 int rev(int a[50], int n)
 {
-	int x = 0, j = 0, count = 0;
+	int var1 = 0, itr = 0, count = 0;
 	while (n > 0)
 	{
-		x = n % 2;
-		a[j] = x;
+		var1 = n % 2;
+		a[itr] = var1;
 		n = n / 2;
-		j++;
+		itr++;
 	}
-	a[j] = 0;
-	a[j + 1] = 0;
-	printf("\nactual binary (base:2)\n");
-	for (int i = 0; i < j; i++)
+	a[itr] = 0;
+	a[itr + 1] = 0;
+	printf("\nactual binary (base:2) in reverse order\n");
+	for (int i = 0; i < itr; i++)
 		printf("%d", a[i]);
-	return(j);
+	return(itr);
 }
 void main()
 {
 	int a[50], count = 0, count1 = 0;
 	int n;
+	printf("enter number\n");
 	scanf("%d", &n);
-
-	count1 = rev(a, n);
-	a[0] = a[0];
-	printf("\n\n");
-	if (count1 % 2 == 1)
-		check(a, count, 1, count1 + 2);
+	if (n >= 0)
+	{
+		count1 = rev(a, n);		//to know the actual binary bits with base as 2 for the given number and count1 is length
+		a[0] = a[0];
+		printf("\n\n");
+		if (count1 % 2 == 1)
+			check(a, count, 1, count1 + 2);
+		else
+			check(a, count, 1, count1 + 1);
+	}
 	else
-		check(a, count, 1, count1 + 1);
+		printf("\n invalid number");
 	getch();
 }
