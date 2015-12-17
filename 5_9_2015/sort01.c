@@ -41,26 +41,35 @@ void sort3(int a[100], int len, int sum)
 void main()
 {
 	int len,a[100], itr, count = 0, sum = 0;		//len is total length of the array
+	printf("enter array length\n");
 	scanf("%d", &len);
-	for (itr = 0; itr < len; itr++)
+	if (len> 0)
 	{
-		scanf("%d", &a[itr]);
-		sum = sum + a[itr];
-		if (a[itr] == 0)
-			count = count + 1;
+		printf("enter array elements\n");
+		for (itr = 0; itr < len; itr++)
+		{
+			scanf("%d", &a[itr]);
+			sum = sum + a[itr];
+			if (a[itr] == 0)
+				count = count + 1;
+		}
+		sort1(a, len, count);		
+		printf("\nmethod-1:");                        //sorting method 1 (here count is no.of 0's in array)
+		for (itr = 0; itr < len; itr++)
+			printf("%d", a[itr]);
+		printf("\n");
+		sort2(a, len);									//sorting method 2
+		printf("method-2:");
+		for (itr = 0; itr < len; itr++)
+			printf("%d", a[itr]);
+		printf("\n");
+		sort3(a, len, sum);								//sorting method 3
+		printf("method-3:");
+		for (itr = 0; itr < len; itr++)
+			printf("%d", a[itr]);
 	}
-	sort1(a,len, count);							//sorting method 1 count is no.of 0's in array
-	for (itr = 0; itr <len; itr++)
-		printf("%d", a[itr]);
-	printf("\n");
-	sort2(a, len);									//sorting method 2
-	for (itr = 0; itr <len; itr++)
-		printf("%d", a[itr]);
-	printf("\n");
-	sort3(a, len, sum);								//sorting method 3
-	for (itr = 0; itr <len; itr++)
-		printf("%d", a[itr]);
-
+	else
+		printf("array does not exists");
 	getch();
 
 }
