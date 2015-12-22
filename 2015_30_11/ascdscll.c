@@ -1,5 +1,6 @@
 /*there is a sequence of ascending nodes and after that a sequences od descending nodes place in correct order
-Procedure:first go upto that node untill ascending order ends.and from there and upto end reverse the list and attach it to the previous node*/
+Procedure:first go upto that node untill ascending order ends.and from there and upto end reverse the list and attach it to the previous node
+Ex:- 1 2 3 4 10 9 8 7 6 o/p :- 1 2 3 4 6 7 8 9 10*/
 #include<stdio.h>
 #include<conio.h>
 #include<malloc.h>
@@ -82,11 +83,16 @@ void main()
 	int n, i;
 	printf("enter length\n");
 	scanf("%d", &n);
-	for (i = 0;i<n*2; i++)
-		create(&head1);
-	/*for (i = n * 2; i > n; i--)
-		create(&head1, i);*/
-	ascdsc(&head1);
-	dis(head1);
+	if (n > 0)
+	{
+		for (i = 0; i < n; i++)
+			create(&head1);
+		for (i = n * 2; i > n; i--)
+			create(&head1);
+		ascdsc(&head1);
+		dis(head1);
+	}
+	else
+		printf("\n invalid length");
 	getch();
 }

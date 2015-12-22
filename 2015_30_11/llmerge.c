@@ -16,7 +16,7 @@ void insaf(node **h, int data1,int itr)
 	temp->data = data1;
 	temp->link = NULL;
 	if (*h == NULL)
-	{
+	{										done
 		*h = temp;
 	}
 	else
@@ -100,12 +100,21 @@ void main()
 	scanf("%d", &n2);
 	printf("enter r\n");
 	scanf("%d", &r);
-	for (i = 1; i <= r*2; i++)
-		create(&head1, n1*i);
-	printf("\n");
-	for (i = 1; i <= r*2; i++)
-		create(&head2, n2*i);
-	mergmethd2(&head1, &head2, r);
-	dis(head1,r);
+	if (r > 0 && n1 > -1 && n2 > -1)
+	{
+		for (i = 1; i <= r * 2; i++)
+			create(&head1, n1*i);
+		printf("\n");
+		for (i = 1; i <= r * 2; i++)
+			create(&head2, n2*i);
+		mergmethd2(&head1, &head2, r);
+		dis(head1, r);
+	}
+	else
+		if (r <= 0)
+			printf("\n invalid entry:- r cannot be less than 1");
+		else
+			printf("\nnumbers cannot be negative");
+
 	getch();
-}*/
+}

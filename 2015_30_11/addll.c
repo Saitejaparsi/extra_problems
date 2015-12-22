@@ -25,24 +25,32 @@ void rev(struct node **list)
 	current->link = prev;
 	*list = current;
 }
-void create(node **head)
+int create(node **head)
 {
 	node *temp, *varpointer;
-	int data1;
+    int data1;
 	scanf("%d", &data1);
-	temp = (node*)malloc(sizeof(node));
-	temp->data = data1;
-	temp->link = NULL;
-	if (*head == NULL)
+	if (data1 > -1 && data1 <10)
 	{
-		*head = temp;
+		temp = (node*)malloc(sizeof(node));
+		temp->data = data1;
+		temp->link = NULL;
+		if (*head == NULL)
+		{
+			*head = temp;
+		}
+		else
+		{
+			varpointer = *head;
+			while (varpointer->link != NULL)
+				varpointer = varpointer->link;
+			varpointer->link = temp;
+		}
+		return 0;
 	}
-	else
-	{
-		varpointer = *head;
-		while (varpointer->link != NULL)
-			varpointer = varpointer->link;
-		varpointer->link = temp;
+	else{
+		printf("value not allowed enter again\nnumber should be >-1 and <10\n");
+		return 1;
 	}
 }
 void dis(node *h)
@@ -100,6 +108,7 @@ void add(node **h1, node **h2)
 	}
 	if (sum > 9)
 		r->data = sum2+r->data;
+
 }
 void xtranode(node **h)   //creating an extra dummy node at the end so we can access all the original nodes
 {
@@ -117,34 +126,49 @@ void xtranode(node **h)   //creating an extra dummy node at the end so we can ac
 void main()
 {
 	node *head1 = NULL, *head2 = NULL;
-	int n, i, pos, num, n1, n2, r;
-	printf("enter n1\n");
+	int n, i, pos, num, n1, n2, r,var=0;
+	printf("enter list1 length n1\n");
 	scanf("%d", &n1);
-	for (i = 1; i <= n1; i++)
-		create(&head1);
-	printf("enter n2\n");
+	printf("enter list2 length n2\n");
 	scanf("%d", &n2);
-	for (i = 1; i <=n2; i++)
-		create(&head2);
 	if (n1 > 0 && n2 > 0)
 	{
-		rev(&head1);
-		rev(&head2);
-		xtranode(&head1);
-		xtranode(&head2);
-
-		if (n1 >= n2)
+		printf("\n enter list1\n");
+		for (i = 1; i <= n1; i++)
 		{
-			add(&head1, &head2);
-			rev(&head1);
-			dis(head1);
+			var=create(&head1);
+				if(var==1)
+					i = i - 1;
 		}
-		else
+		printf("\n enter list2\n");
+		for (i = 1; i <= n2; i++)
 		{
-			add(&head2, &head1);
+			var=create(&head2);
+			if (var == 1)
+				i = i - 1;
+		}
+		if (n1 > 0 && n2 > 0)
+		{
+			rev(&head1);
 			rev(&head2);
-			dis(head2);
+			xtranode(&head1);
+			xtranode(&head2);
+
+			if (n1 >= n2)
+			{
+				add(&head1, &head2);
+				rev(&head1);
+				dis(head1);
+			}
+			else
+			{
+				add(&head2, &head1);
+				rev(&head2);
+				dis(head2);
+			}
 		}
 	}
+	else
+		printf("length cannot be empty or negative");
 	getch();
 }

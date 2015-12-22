@@ -62,9 +62,14 @@ void main()
 	int n, i, pos, num;
 	printf("\n enter list length");
 	scanf("%d", &n);
-	for (i = 0; i<n; i++)
-		create(&head);
-	recursiveReverse(&head);
-	dis(head);
+	if (n > 0)
+	{
+		for (i = 0; i < n; i++)
+			create(&head);
+		recursiveReverse(&head);
+		dis(head);
+	}
+	else
+		printf("invalid length");
 	getch();
 }

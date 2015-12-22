@@ -21,25 +21,31 @@ void dis(node *h)
 	}
 	printf("%d->", p->data);
 }
-void create(node **head)
+int create(node **head)
 {
     int x;
     scanf("%d",&x);
-	node *temp, *p;
-	temp = (node*)malloc(sizeof(node));
-	temp->data = x;
-	temp->link = NULL;
-	if (*head == NULL)
+	if (x >= 0)
 	{
-		*head = temp;
+		node *temp, *p;
+		temp = (node*)malloc(sizeof(node));
+		temp->data = x;
+		temp->link = NULL;
+		if (*head == NULL)
+		{
+			*head = temp;
+		}
+		else
+		{
+			p = *head;
+			while (p->link != NULL)
+				p = p->link;
+			p->link = temp;
+		}
+		return 1;
 	}
 	else
-	{
-		p = *head;
-		while (p->link != NULL)
-			p = p->link;
-		p->link = temp;
-	}
+		return 0;
 
 }
 void sort(node **head)
@@ -69,12 +75,25 @@ void sort(node **head)
 void main()
 {
 	node *head = NULL;
-	int n, i, pos, num;
+	int n,var, i, pos, num;
 	printf("\n enter list length");
 	scanf("%d",&n);
-	for(i=0;i<n;i++)
-	create(&head);
-	sort(&head);
-	dis(head);
+	if (n > 0)
+	{
+		for (i = 0; i < n; i++)
+		{
+			var = create(&head);
+			if (var == 0)
+			{
+				printf("\n invalid entry\n");
+				i = i - 1;
+			}
+		}
+		sort(&
+			head);
+		dis(head);
+	}
+	else
+		printf("\n invalid length");
 	getch();
 }

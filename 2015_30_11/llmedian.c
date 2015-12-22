@@ -68,8 +68,13 @@ void main()
 	int n, i;
 	printf("enter length\n");
 	scanf("%d", &n);
+	if(n>0)
+	{
 	for (i = 0;i<n ; i++)
 		create(&head1);
 	dis(head1);
+	}
+	else
+	printf("invalid length");
 	getch();
 }
